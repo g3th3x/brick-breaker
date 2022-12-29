@@ -1,6 +1,7 @@
 export class Panel {
   constructor(game) {
     this.canvasWidth = game.canvasWidth;
+    this.canvasHeight = game.canvasHeight;
 
     this.width = 100;
     this.height = 15;
@@ -8,10 +9,14 @@ export class Panel {
     this.panelSpeed = 8;
     this.speed = 0;
 
+    this.start();
+  }
+  start() {
     this.position = {
-      x: game.canvasWidth / 2 - this.width / 2,
-      y: game.canvasHeight - this.height - 15,
+      x: this.canvasWidth / 2 - this.width / 2,
+      y: this.canvasHeight - this.height - 15,
     };
+    console.log(this.position);
   }
   moveLeft() {
     this.speed = -this.panelSpeed;
