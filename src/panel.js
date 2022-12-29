@@ -2,9 +2,10 @@ export class Panel {
   constructor(game) {
     this.canvasWidth = game.canvasWidth;
 
-    this.width = 200;
-    this.height = 50;
+    this.width = 100;
+    this.height = 15;
 
+    this.panelSpeed = 8;
     this.speed = 0;
 
     this.position = {
@@ -13,10 +14,10 @@ export class Panel {
     };
   }
   moveLeft() {
-    this.speed = -5;
+    this.speed = -this.panelSpeed;
   }
   moveRight() {
-    this.speed = 5;
+    this.speed = this.panelSpeed;
   }
   stop() {
     this.speed = 0;
@@ -27,5 +28,9 @@ export class Panel {
   }
   update(deltaTime) {
     this.position.x += this.speed;
+    // Panel Restrictions
+    if (this.position.x < 0) this.position.x = 0;
+    if (this.position.x + this.width > this.canvasWidth)
+      this.position.x = this.canvasWidth - this.width;
   }
 }
