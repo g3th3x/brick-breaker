@@ -9,6 +9,7 @@ export class BrickBreakerGame {
     this.panel = new Panel(this);
     this.ball = new Ball(this);
     this.gameObjects = [];
+    this.lives = 1;
 
     new InputHandler(this.panel, this);
   }
@@ -21,5 +22,9 @@ export class BrickBreakerGame {
   }
   draw(ctx) {
     this.gameObjects.forEach((object) => object.draw(ctx));
+    // Draw lives
+    ctx.font = "20px Arial";
+    ctx.fillStyle = "white";
+    ctx.fillText(`Lives: ${this.lives}`, 10, 25);
   }
 }

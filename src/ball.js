@@ -2,13 +2,15 @@ export class Ball {
   constructor(game) {
     this.canvasWidth = game.canvasWidth;
     this.canvasHeight = game.canvasHeight;
+
+    this.game = game;
     this.ballRadius = 8;
 
     this.start();
   }
   start() {
     this.position = { x: 10, y: 100 };
-    this.speed = { x: 5, y: 5 };
+    this.speed = { x: 5, y: -5 };
   }
   draw(ctx) {
     ctx.beginPath();
@@ -33,7 +35,9 @@ export class Ball {
     }
     // Bottom
     if (this.position.y + this.ballRadius > this.canvasHeight) {
-      this.speed.y = -this.speed.y;
+      //this.speed.y = -this.speed.y;
+      this.game.lives--;
+      this.start();
     }
   }
 }
