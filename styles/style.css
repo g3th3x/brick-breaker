@@ -1,0 +1,21 @@
+html,
+body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+canvas {
+    border: 1px solid black;
+    background: linear-gradient(to bottom, #8e06fd, #ece90d, rgba(0, 0, 0, 0.87))
+}
+
+img {
+    display: none;
+}
