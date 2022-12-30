@@ -1,3 +1,5 @@
+import { collisionDetect } from "./collisions.js";
+
 export class Ball {
   constructor(game) {
     this.canvasWidth = game.canvasWidth;
@@ -38,6 +40,12 @@ export class Ball {
       //this.speed.y = -this.speed.y;
       this.game.lives--;
       this.start();
+    }
+
+    // Collisions
+    if (collisionDetect(this, this.game.panel)) {
+      this.speed.y = -this.speed.y;
+      this.position.y = this.game.panel.position.y - this.ballRadius;
     }
   }
 }
