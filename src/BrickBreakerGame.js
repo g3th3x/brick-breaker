@@ -1,7 +1,7 @@
 import { Panel } from "./panel.js";
 import { InputHandler } from "./input.js";
 import { Ball } from "./ball.js";
-import { Brick } from "./brick.js";
+import { stageMaker, stage1 } from "./stages.js";
 
 export class BrickBreakerGame {
   constructor(canvasWidth, canvasHeight) {
@@ -9,21 +9,25 @@ export class BrickBreakerGame {
     this.canvasHeight = canvasHeight;
     this.panel = new Panel(this);
     this.ball = new Ball(this);
-    this.brick = new Brick(this);
+    this.bricks = [];
+    this.stages = [stage1];
     this.gameObjects = [];
     this.lives = 1;
 
     new InputHandler(this.panel, this);
   }
   start() {
-    this.gameObjects = [this.panel, this.ball, this.brick];
+    this.bricks = stageMaker(this, this.stages[0]);
+    this.gameObjects = [this.panel, this.ball];
   }
   update(deltaTime) {
     this.start();
-    this.gameObjects.forEach((object) => object.update(deltaTime));
+    [...this.gameObjects, ...this.bricks].forEach((object) =>
+      object.update(deltaTime)
+    );
   }
   draw(ctx) {
-    this.gameObjects.forEach((object) => object.draw(ctx));
+    [...this.gameObjects, ...this.bricks].forEach((object) => object.draw(ctx));
     // Draw lives
     ctx.font = "20px Arial";
     ctx.fillStyle = "white";

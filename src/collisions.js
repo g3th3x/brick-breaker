@@ -13,7 +13,7 @@ export function collisionDetect(ball, gameObject) {
     ball.position.x >= objectLeftSide &&
     ball.position.x + ball.ballRadius <= objectRightSide
   ) {
-    console.log("collision");
+    //console.log("collision");
     return true;
   } else {
     return false;
