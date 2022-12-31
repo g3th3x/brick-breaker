@@ -16,7 +16,6 @@ export class Panel {
       x: this.canvasWidth / 2 - this.width / 2,
       y: this.canvasHeight - this.height - 15,
     };
-    console.log(this.position);
   }
   moveLeft() {
     this.speed = -this.panelSpeed;

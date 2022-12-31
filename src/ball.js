@@ -20,7 +20,7 @@ export class Ball {
     ctx.arc(this.position.x, this.position.y, this.ballRadius, 0, Math.PI * 2);
     ctx.fill();
   }
-  update(deltaTime) {
+  update() {
     this.position.x += this.speed.x;
     this.position.y += this.speed.y;
     // Ball Restrictions
