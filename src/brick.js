@@ -9,7 +9,6 @@ export class Brick {
     this.width = 50;
     this.height = 15;
     this.position = position;
-    //this.position = { x: 25, y: 25 };
   }
   draw(ctx) {
     ctx.beginPath();

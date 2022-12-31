@@ -11,7 +11,7 @@ export class Ball {
     this.start();
   }
   start() {
-    this.position = { x: 10, y: 100 };
+    this.position = { x: 10, y: 120 };
     this.speed = { x: 5, y: -5 };
   }
   draw(ctx) {

@@ -2,17 +2,20 @@ import { Panel } from "./panel.js";
 import { InputHandler } from "./input.js";
 import { Ball } from "./ball.js";
 import { stageMaker, stage1 } from "./stages.js";
+//import { gameOver } from "./gamestates.js";
+import { GAME_STATE } from "./constants.js";
 
 export class BrickBreakerGame {
   constructor(canvasWidth, canvasHeight) {
     this.canvasWidth = canvasWidth;
     this.canvasHeight = canvasHeight;
+    //this.gameState = GAME_STATE.GAMEOVER;
     this.panel = new Panel(this);
     this.ball = new Ball(this);
     this.bricks = [];
     this.stages = [stage1];
     this.gameObjects = [];
-    this.lives = 1;
+    this.lives = 2;
 
     new InputHandler(this.panel, this);
   }
@@ -21,16 +24,36 @@ export class BrickBreakerGame {
     this.gameObjects = [this.panel, this.ball];
   }
   update(deltaTime) {
-    this.start();
+    if (this.lives === 0) this.gameState = GAME_STATE.GAMEOVER;
+
+    if (this.gameState === GAME_STATE.GAMEOVER) return;
+
+    if (this.bricks.length === 0) {
+      this.start();
+    }
+
     [...this.gameObjects, ...this.bricks].forEach((object) =>
       object.update(deltaTime)
     );
   }
   draw(ctx) {
     [...this.gameObjects, ...this.bricks].forEach((object) => object.draw(ctx));
+    // GAME OVER
+    if (this.gameState === GAME_STATE.GAMEOVER) {
+      ctx.beginPath();
+      ctx.rect(0, 0, this.canvasWidth, this.canvasHeight);
+      ctx.fillStyle = "rgba(0,0,0,.5)";
+      ctx.fill();
+
+      ctx.font = "20px Arial";
+      ctx.fillStyle = "#fff";
+      ctx.textAlign = "center";
+      ctx.fillText("GAME OVER", this.canvasWidth / 2, this.canvasHeight / 2);
+    }
     // Draw lives
+    ctx.beginPath();
     ctx.font = "20px Arial";
-    ctx.fillStyle = "white";
+    ctx.fillStyle = "#fff";
     ctx.fillText(`Lives: ${this.lives}`, 10, 25);
   }
 }
