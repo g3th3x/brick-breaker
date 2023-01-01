@@ -18,6 +18,8 @@ export class Brick {
   update() {
     if (collisionDetect(this.game.ball, this)) {
       this.game.ball.speed.y = -this.game.ball.speed.y;
+
+      this.markToDelete = true;
     }
   }
 }

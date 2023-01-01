@@ -2,7 +2,6 @@ import { Panel } from "./panel.js";
 import { InputHandler } from "./input.js";
 import { Ball } from "./ball.js";
 import { stageMaker, stage1 } from "./stages.js";
-//import { gameOver } from "./gamestates.js";
 import { GAME_STATE } from "./constants.js";
 
 export class BrickBreakerGame {
@@ -35,6 +34,8 @@ export class BrickBreakerGame {
     [...this.gameObjects, ...this.bricks].forEach((object) =>
       object.update(deltaTime)
     );
+
+    this.bricks = this.bricks.filter((brick) => !brick.markToDelete);
   }
   draw(ctx) {
     [...this.gameObjects, ...this.bricks].forEach((object) => object.draw(ctx));
@@ -50,10 +51,12 @@ export class BrickBreakerGame {
       ctx.textAlign = "center";
       ctx.fillText("GAME OVER", this.canvasWidth / 2, this.canvasHeight / 2);
     }
+
     // Draw lives
     ctx.beginPath();
     ctx.font = "20px Arial";
     ctx.fillStyle = "#fff";
+    ctx.textAlign = "left";
     ctx.fillText(`Lives: ${this.lives}`, 10, 25);
   }
 }

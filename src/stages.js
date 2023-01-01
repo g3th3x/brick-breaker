@@ -7,7 +7,7 @@ export function stageMaker(game, stage) {
     row.forEach((brick, brickIndex) => {
       if (brick === 1) {
         let position = {
-          x: 55 * brickIndex,
+          x: 15 + 55 * brickIndex,
           y: 40 + 20 * rowIndex,
         };
         bricks.push(new Brick(game, position));
@@ -19,6 +19,11 @@ export function stageMaker(game, stage) {
 }
 
 export const stage1 = [
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+  [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+  [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 ];
