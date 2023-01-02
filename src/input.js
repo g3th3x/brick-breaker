@@ -1,13 +1,19 @@
 export class InputHandler {
-  constructor(panel) {
+  constructor(panel, game) {
     document.addEventListener("keydown", (e) => {
-      // console.log(e.code);
+      console.log(e.code);
       switch (e.code) {
         case "ArrowRight":
           panel.moveRight();
           break;
         case "ArrowLeft":
           panel.moveLeft();
+          break;
+        case "Enter":
+          game.start();
+          break;
+        case "KeyP":
+          game.pauseGame();
           break;
       }
     });

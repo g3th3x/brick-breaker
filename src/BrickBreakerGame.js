@@ -8,7 +8,7 @@ export class BrickBreakerGame {
   constructor(canvasWidth, canvasHeight) {
     this.canvasWidth = canvasWidth;
     this.canvasHeight = canvasHeight;
-    //this.gameState = GAME_STATE.GAMEOVER;
+    this.gameState = GAME_STATE.START;
     this.panel = new Panel(this);
     this.ball = new Ball(this);
     this.bricks = [];
@@ -39,6 +39,18 @@ export class BrickBreakerGame {
   }
   draw(ctx) {
     [...this.gameObjects, ...this.bricks].forEach((object) => object.draw(ctx));
+    // PAUSE GAME
+    if (this.gameState === GAME_STATE.PAUSE) {
+      ctx.beginPath();
+      ctx.rect(0, 0, this.canvasWidth, this.canvasHeight);
+      ctx.fillStyle = "rgba(0,0,0,.5)";
+      ctx.fill();
+
+      ctx.font = "20px Arial";
+      ctx.fillStyle = "#fff";
+      ctx.textAlign = "center";
+      ctx.fillText("PAUSE", this.canvasWidth / 2, this.canvasHeight / 2);
+    }
     // GAME OVER
     if (this.gameState === GAME_STATE.GAMEOVER) {
       ctx.beginPath();
@@ -58,5 +70,10 @@ export class BrickBreakerGame {
     ctx.fillStyle = "#fff";
     ctx.textAlign = "left";
     ctx.fillText(`Lives: ${this.lives}`, 10, 25);
+  }
+  pauseGame() {
+    if (this.gameState !== GAME_STATE.PAUSE) {
+      this.gameState = GAME_STATE.PAUSE;
+    }
   }
 }
