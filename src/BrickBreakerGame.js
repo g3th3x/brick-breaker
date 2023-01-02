@@ -16,6 +16,7 @@ export class BrickBreakerGame {
     this.nextStage = 0;
     this.gameObjects = [];
     this.lives = LIVES;
+    this.score = 0;
 
     new InputHandler(this.panel, this);
   }
@@ -132,7 +133,11 @@ export class BrickBreakerGame {
     ctx.font = "20px Arial";
     ctx.fillStyle = "#fff";
     ctx.textAlign = "left";
-    ctx.fillText(`Lives: ${this.lives} Stage: ${currentStage}`, 10, 25);
+    ctx.fillText(
+      `Lives: ${this.lives} Stage: ${currentStage} Score: ${this.score}`,
+      10,
+      25
+    );
   }
   pauseGame() {
     if (this.gameState !== GAME_STATE.PAUSE) {

@@ -9,6 +9,8 @@ export class Brick {
     this.width = 50;
     this.height = 15;
     this.position = position;
+
+    this.markToDelete = false;
   }
   draw(ctx) {
     ctx.beginPath();
@@ -20,6 +22,7 @@ export class Brick {
       this.game.ball.speed.y = -this.game.ball.speed.y;
 
       this.markToDelete = true;
+      this.game.score++;
     }
   }
 }
