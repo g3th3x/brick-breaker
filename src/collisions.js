@@ -1,3 +1,5 @@
+import { playSound } from "./audio.js";
+
 export function collisionDetect(ball, gameObject) {
   let ballBottom = ball.position.y + ball.ballRadius;
   let ballTop = ball.position.y;
@@ -14,6 +16,7 @@ export function collisionDetect(ball, gameObject) {
     ball.position.x + ball.ballRadius <= objectRightSide
   ) {
     //console.log("collision");
+    playSound();
     return true;
   } else {
     return false;
