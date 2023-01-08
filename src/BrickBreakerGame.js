@@ -63,10 +63,7 @@ export class BrickBreakerGame {
     [...this.gameObjects, ...this.bricks].forEach((object) => object.draw(ctx));
     // MAIN MENU
     if (this.gameState === GAME_STATE.MAINMENU) {
-      ctx.beginPath();
-      ctx.rect(0, 0, this.canvasWidth, this.canvasHeight);
-      ctx.fillStyle = "rgba(0,0,0,.5)";
-      ctx.fill();
+      screenShadow(ctx, this.canvasWidth, this.canvasHeight);
 
       ctx.font = "20px Arial";
       ctx.fillStyle = "#fff";
@@ -82,17 +79,19 @@ export class BrickBreakerGame {
         this.canvasHeight / 2 + 60
       );
       ctx.fillText(
-        "P - game pause",
+        "P - pause game",
         this.canvasWidth / 2,
         this.canvasHeight / 2 + 90
+      );
+      ctx.fillText(
+        "R - restart game",
+        this.canvasWidth / 2,
+        this.canvasHeight / 2 + 120
       );
     }
     // PAUSE GAME
     if (this.gameState === GAME_STATE.PAUSE) {
-      ctx.beginPath();
-      ctx.rect(0, 0, this.canvasWidth, this.canvasHeight);
-      ctx.fillStyle = "rgba(0,0,0,.5)";
-      ctx.fill();
+      screenShadow(ctx, this.canvasWidth, this.canvasHeight);
 
       ctx.font = "20px Arial";
       ctx.fillStyle = "#fff";
@@ -101,10 +100,7 @@ export class BrickBreakerGame {
     }
     // GAME OVER
     if (this.gameState === GAME_STATE.GAMEOVER) {
-      ctx.beginPath();
-      ctx.rect(0, 0, this.canvasWidth, this.canvasHeight);
-      ctx.fillStyle = "rgba(0,0,0,.5)";
-      ctx.fill();
+      screenShadow(ctx, this.canvasWidth, this.canvasHeight);
 
       ctx.font = "20px Arial";
       ctx.fillStyle = "#fff";
@@ -113,10 +109,7 @@ export class BrickBreakerGame {
     }
     // WINNER
     if (this.gameState === GAME_STATE.WINNER) {
-      ctx.beginPath();
-      ctx.rect(0, 0, this.canvasWidth, this.canvasHeight);
-      ctx.fillStyle = "rgba(0,0,0,.5)";
-      ctx.fill();
+      screenShadow(ctx, this.canvasWidth, this.canvasHeight);
 
       ctx.font = "40px Arial";
       ctx.fillStyle = "#fff";
@@ -146,4 +139,14 @@ export class BrickBreakerGame {
       this.gameState = this.gameState.START;
     }
   }
+  restartGame() {
+    document.location.reload();
+  }
+}
+
+function screenShadow(ctx, canvasWidth, canvasHeight) {
+  ctx.beginPath();
+  ctx.rect(0, 0, canvasWidth, canvasHeight);
+  ctx.fillStyle = "rgba(0,0,0,.5)";
+  ctx.fill();
 }

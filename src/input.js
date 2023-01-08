@@ -15,6 +15,9 @@ export class InputHandler {
         case "KeyP":
           game.pauseGame();
           break;
+        case "KeyR":
+          game.restartGame();
+          break;
       }
     });
 
