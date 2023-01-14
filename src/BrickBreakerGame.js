@@ -8,7 +8,7 @@ import { getContext } from "./utils/context.js";
 export class BrickBreakerGame {
   ctx = getContext();
 
-  constructor(canvasWidth, canvasHeight) {
+  constructor() {
     this.canvasWidth = CANVAS_WIDTH;
     this.canvasHeight = CANVAS_HEIGHT;
     this.gameState = GAME_STATE.MAINMENU;
