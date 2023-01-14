@@ -2,9 +2,6 @@ import { collisionDetect } from "./collisions.js";
 
 export class Brick {
   constructor(game, position) {
-    this.canvasWidth = game.canvasWidth;
-    this.canvasHeight = game.canvasHeight;
-
     this.game = game;
     this.width = 50;
     this.height = 15;

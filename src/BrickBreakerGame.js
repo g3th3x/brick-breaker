@@ -2,12 +2,15 @@ import { Panel } from "./panel.js";
 import { InputHandler } from "./input.js";
 import { Ball } from "./ball.js";
 import { stageMaker, stages } from "./stages.js";
-import { GAME_STATE, LIVES } from "./constants.js";
+import { GAME_STATE, LIVES, CANVAS_WIDTH, CANVAS_HEIGHT } from "./constants.js";
+import { getContext } from "./utils/context.js";
 
 export class BrickBreakerGame {
+  ctx = getContext();
+
   constructor(canvasWidth, canvasHeight) {
-    this.canvasWidth = canvasWidth;
-    this.canvasHeight = canvasHeight;
+    this.canvasWidth = CANVAS_WIDTH;
+    this.canvasHeight = CANVAS_HEIGHT;
     this.gameState = GAME_STATE.MAINMENU;
     this.panel = new Panel(this);
     this.ball = new Ball(this);

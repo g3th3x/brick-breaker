@@ -1,11 +1,13 @@
 import { BrickBreakerGame } from "./BrickBreakerGame.js";
 import { CANVAS_WIDTH, CANVAS_HEIGHT } from "./constants.js";
 
-window.addEventListener("load", () => {
-  let canvas = document.querySelector("#game");
-  let ctx = canvas.getContext("2d");
+let cvs = document.createElement("canvas");
+cvs.width = CANVAS_WIDTH;
+cvs.height = CANVAS_HEIGHT;
+document.body.append(cvs);
 
-  let game = new BrickBreakerGame(CANVAS_WIDTH, CANVAS_HEIGHT);
+window.addEventListener("load", () => {
+  let game = new BrickBreakerGame();
 
   let lastTime = 0;
 
@@ -13,10 +15,10 @@ window.addEventListener("load", () => {
     let deltaTime = timestamp - lastTime;
     lastTime = timestamp;
 
-    ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    game.ctx.clearRect(0, 0, game.canvasWidth, game.canvasHeight);
 
     game.update(deltaTime);
-    game.draw(ctx);
+    game.draw(game.ctx);
 
     requestAnimationFrame(gameLoop);
   }

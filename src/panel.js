@@ -30,7 +30,7 @@ export class Panel {
     ctx.fillStyle = "#fff";
     ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
   }
-  update(deltaTime) {
+  update() {
     this.position.x += this.speed;
     // Panel Restrictions
     if (this.position.x < 0) this.position.x = 0;
