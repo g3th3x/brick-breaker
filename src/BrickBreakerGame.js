@@ -66,61 +66,63 @@ export class BrickBreakerGame {
     [...this.gameObjects, ...this.bricks].forEach((object) => object.draw(ctx));
     // MAIN MENU
     if (this.gameState === GAME_STATE.MAINMENU) {
-      screenShadow(ctx, this.canvasWidth, this.canvasHeight);
-
-      ctx.font = "20px Arial";
-      ctx.fillStyle = "#fff";
-      ctx.textAlign = "center";
-      ctx.fillText(
+      shadowScreen(ctx, this.canvasWidth, this.canvasHeight);
+      showLogo(ctx, this.canvasWidth, this.canvasHeight);
+      showText(
+        ctx,
         "Press ENTER to START",
-        this.canvasWidth / 2,
-        this.canvasHeight / 2
+        this.canvasWidth,
+        this.canvasHeight + 90
       );
-      ctx.fillText(
+      showText(
+        ctx,
         "Left or right arrow - moving left or right",
-        this.canvasWidth / 2,
-        this.canvasHeight / 2 + 60
+        this.canvasWidth,
+        this.canvasHeight + 190
       );
-      ctx.fillText(
+      showText(
+        ctx,
         "P - pause game",
-        this.canvasWidth / 2,
-        this.canvasHeight / 2 + 90
+        this.canvasWidth,
+        this.canvasHeight + 250
       );
-      ctx.fillText(
+      showText(
+        ctx,
         "R - restart game",
-        this.canvasWidth / 2,
-        this.canvasHeight / 2 + 120
+        this.canvasWidth,
+        this.canvasHeight + 310
       );
     }
     // PAUSE GAME
     if (this.gameState === GAME_STATE.PAUSE) {
-      screenShadow(ctx, this.canvasWidth, this.canvasHeight);
-
-      ctx.font = "20px Arial";
-      ctx.fillStyle = "#fff";
-      ctx.textAlign = "center";
-      ctx.fillText("PAUSE", this.canvasWidth / 2, this.canvasHeight / 2);
+      shadowScreen(ctx, this.canvasWidth, this.canvasHeight);
+      showText(ctx, "PAUSE", this.canvasWidth, this.canvasHeight);
     }
     // GAME OVER
     if (this.gameState === GAME_STATE.GAMEOVER) {
-      screenShadow(ctx, this.canvasWidth, this.canvasHeight);
-
-      ctx.font = "20px Arial";
-      ctx.fillStyle = "#fff";
-      ctx.textAlign = "center";
-      ctx.fillText("GAME OVER", this.canvasWidth / 2, this.canvasHeight / 2);
+      shadowScreen(ctx, this.canvasWidth, this.canvasHeight);
+      showText(ctx, "GAME OVER", this.canvasWidth, this.canvasHeight);
+      showText(
+        ctx,
+        "Press R to RESTART",
+        this.canvasWidth,
+        this.canvasHeight + 60
+      );
     }
     // WINNER
     if (this.gameState === GAME_STATE.WINNER) {
-      screenShadow(ctx, this.canvasWidth, this.canvasHeight);
-
-      ctx.font = "40px Arial";
-      ctx.fillStyle = "#fff";
-      ctx.textAlign = "center";
-      ctx.fillText(
-        "CONGRATULATIONS YOU WON!",
-        this.canvasWidth / 2,
-        this.canvasHeight / 2
+      shadowScreen(ctx, this.canvasWidth, this.canvasHeight);
+      showText(
+        ctx,
+        "CONGRATULATIONS, YOU'VE WON",
+        this.canvasWidth,
+        this.canvasHeight
+      );
+      showText(
+        ctx,
+        "Press R to RESTART",
+        this.canvasWidth,
+        this.canvasHeight + 60
       );
     }
     // Draw lives
@@ -136,20 +138,34 @@ export class BrickBreakerGame {
     );
   }
   pauseGame() {
-    if (this.gameState !== GAME_STATE.PAUSE) {
-      this.gameState = GAME_STATE.PAUSE;
-    } else {
-      this.gameState = this.gameState.START;
-    }
+    if (this.gameState != GAME_STATE.GAMEOVER)
+      this.gameState !== GAME_STATE.PAUSE
+        ? (this.gameState = GAME_STATE.PAUSE)
+        : (this.gameState = this.gameState.START);
   }
   restartGame() {
     document.location.reload();
   }
 }
 
-function screenShadow(ctx, canvasWidth, canvasHeight) {
+function shadowScreen(ctx, canvasWidth, canvasHeight) {
   ctx.beginPath();
-  ctx.rect(0, 0, canvasWidth, canvasHeight);
   ctx.fillStyle = "rgba(0,0,0,.5)";
-  ctx.fill();
+  ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+}
+
+function showText(ctx, text, canvasWidth, canvasHeight) {
+  ctx.beginPath();
+  ctx.font = "bold 20px Arial";
+  ctx.fillStyle = "#fff";
+  ctx.textAlign = "center";
+  ctx.fillText(text, canvasWidth / 2, canvasHeight / 2);
+}
+
+function showLogo(ctx, canvasWidth, canvasHeight) {
+  ctx.beginPath();
+  ctx.font = "bold 60px Arial";
+  ctx.fillStyle = "#FFFF00";
+  ctx.textAlign = "center";
+  ctx.fillText("BRICK BREAKER", canvasWidth / 2, canvasHeight / 2 - 80);
 }
